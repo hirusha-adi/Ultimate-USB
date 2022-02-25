@@ -59,3 +59,15 @@ class Wifi:
         self.processOutput()
         if self.file:
             self.getOutputFile()
+
+
+if __name__ == "__main__":
+    import time
+    with open("wifi-output.txt", "w+", encoding="utf-8") as file_wifi_passwords, open("errors.txt", "w+", encoding="utf-8") as file_wifi_passwords_errors:
+        file_wifi_passwords_errors.write(
+            "{seperator}\nWifi Passwords".format(seperator='*'*20))
+        obj = Wifi(file=file_wifi_passwords,
+                   error_file=file_wifi_passwords_errors)
+        obj.run()
+        print(obj.getOutput())
+    time.sleep(10)
