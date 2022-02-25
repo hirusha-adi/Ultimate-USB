@@ -9,7 +9,7 @@ class Wifi:
         self.file = file
         self.error_file = error_file
 
-    def getOutput(self):
+    def runCommand(self):
         try:
             return subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode(
                 'utf-8', errors="backslashreplace").split('\n')
@@ -19,7 +19,7 @@ class Wifi:
             raise errors.WifiPasswordError
 
     def processOutput(self):
-        data = self.getOutput()
+        data = self.runCommand()
         profiles = [i.split(":")[1][1:-1]
                     for i in data if "All User Profile" in i]
         for i in profiles:
@@ -37,3 +37,25 @@ class Wifi:
             except Exception as e:
                 if self.error_file:
                     self.error_file.write("\n{err}".format(err=e))
+
+    def getOutput(self):
+        if self.output:
+            return self.output
+        else:
+            return "'Wifi.run()' has not been called yet"
+
+    def getOutputFile(self):
+        if self.output:
+            try:
+                self.file.write(self.output)
+            except Exception as e:
+                if self.error_file:
+                    self.error_file.write("\n{err}".format(err=e))
+        else:
+            if self.error_file:
+                self.error_file.write("'Wifi.run()' has not been called yet")
+
+    def run(self):
+        self.processOutput()
+        if self.file:
+            self.getOutputFile()
