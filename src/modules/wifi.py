@@ -1,11 +1,11 @@
 import os
 import subprocess
-import src.utils.errors as errors
+import src.utils.errors as error
 
 
 class Wifi:
     def __init__(self, file=None, error_file=None):
-        self.output = None
+        self.output = ""
         self.file = file
         self.error_file = error_file
 
@@ -16,7 +16,7 @@ class Wifi:
         except Exception as e:
             if self.error_file:
                 self.error_file.write("\n{err}".format(err=e))
-            raise errors.WifiPasswordError
+            raise error.WifiPasswordError
 
     def processOutput(self):
         data = self.runCommand()
@@ -63,11 +63,14 @@ class Wifi:
 
 if __name__ == "__main__":
     import time
-    with open("wifi-output.txt", "w+", encoding="utf-8") as file_wifi_passwords, open("errors.txt", "w+", encoding="utf-8") as file_wifi_passwords_errors:
-        file_wifi_passwords_errors.write(
-            "{seperator}\nWifi Passwords".format(seperator='*'*20))
-        obj = Wifi(file=file_wifi_passwords,
-                   error_file=file_wifi_passwords_errors)
-        obj.run()
-        print(obj.getOutput())
-    time.sleep(10)
+    if os.name == 'nt':
+        with open("wifi-output.txt", "w+", encoding="utf-8") as file_wifi_passwords, open("errors.txt", "w+", encoding="utf-8") as file_wifi_passwords_errors:
+            file_wifi_passwords.write(
+                "{seperator}\nWifi Passwords\n{seperator}".format(seperator='*'*20))
+            file_wifi_passwords_errors.write(
+                "{seperator}\nWifi Passwords\n{seperator}".format(seperator='*'*20))
+            obj = Wifi(file=file_wifi_passwords,
+                       error_file=file_wifi_passwords_errors)
+            obj.run()
+            print(obj.getOutput())
+        time.sleep(10)

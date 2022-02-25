@@ -1,2 +1,5 @@
 # Ultimate-USB
-this will be awesome
+
+# Special thanks to
+
+- **Suraj** - Testing Code
