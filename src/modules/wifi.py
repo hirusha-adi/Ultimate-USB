@@ -4,14 +4,18 @@ import src.utils.errors as errors
 
 
 class Wifi:
-    def __init__(self):
+    def __init__(self, file=None, error_file=None):
         self.output = None
+        self.file = file
+        self.error_file = error_file
 
     def getOutput(self):
         try:
             return subprocess.check_output(['netsh', 'wlan', 'show', 'profiles']).decode(
                 'utf-8', errors="backslashreplace").split('\n')
-        except:
+        except Exception as e:
+            if self.error_file:
+                self.error_file.write("\n{err}".format(err=e))
             raise errors.WifiPasswordError
 
     def processOutput(self):
@@ -31,4 +35,5 @@ class Wifi:
             except subprocess.CalledProcessError:
                 self.output += "\n{:<30}|  {:<}".format(i, "ENCODING ERROR")
             except Exception as e:
-                print("Error: ", e)
+                if self.error_file:
+                    self.error_file.write("\n{err}".format(err=e))
