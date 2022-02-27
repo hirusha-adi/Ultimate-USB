@@ -1,5 +1,4 @@
 import os
-import subprocess
 import time
 
 from src.modules.wifi import Wifi as Wifi_Passwords
