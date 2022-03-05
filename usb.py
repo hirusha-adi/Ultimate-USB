@@ -1,10 +1,11 @@
 import os
 import time
+from getpass import getuser
 
-from src.modules.wifi import Wifi as Wifi_Passwords
-from src.modules.web_history import WebHistory
-from src.modules.web_bookmarks import WebBookmarks
 import src.utils.file_manager as file_manager
+from src.modules.web_bookmarks import WebBookmarks
+from src.modules.web_history import WebHistory
+from src.modules.wifi import Wifi as Wifi_Passwords
 
 
 class Main:
@@ -14,7 +15,10 @@ class Main:
         self.output = os.path.join(self.cwd, "output")
         file_manager.create_folder_if_not_exists(self.output)
 
-        self.error_file_name = os.path.join(self.output, "error.txt")
+        self.fave_folder = os.path.join(self.output, str(getuser()))
+        file_manager.create_folder_if_not_exists(self.fave_folder)
+
+        self.error_file_name = os.path.join(self.fave_folder, "error.txt")
         file_manager.create_file_if_not_exist(self.error_file_name)
         self.error_file = open(self.error_file_name, "a+", encoding="utf-8")
 
@@ -23,7 +27,7 @@ class Main:
                                    symbol="*",
                                    file=self.error_file)
         wifi_passwords_file_name = os.path.join(
-            self.output, "wifi_passwords.txt")
+            self.fave_folder, "wifi_passwords.txt")
         file_manager.create_file_if_not_exist(wifi_passwords_file_name)
 
         with open(wifi_passwords_file_name, "a+", encoding="utf-8") as wifi_passwords_file:
@@ -40,9 +44,9 @@ class Main:
                                    file=self.error_file)
 
         web_history_file_name_csv = os.path.join(
-            self.output, "web_history.csv")
+            self.fave_folder, "web_history.csv")
         web_history_file_name_json = os.path.join(
-            self.output, "web_history.json")
+            self.fave_folder, "web_history.json")
 
         web_history_obj = WebHistory()
         web_history_obj.run(
@@ -58,9 +62,9 @@ class Main:
                                    file=self.error_file)
 
         web_history_file_name_csv = os.path.join(
-            self.output, "web_bookmarks.csv")
+            self.fave_folder, "web_bookmarks.csv")
         web_history_file_name_json = os.path.join(
-            self.output, "web_bookmarks.json")
+            self.fave_folder, "web_bookmarks.json")
 
         web_history_obj = WebBookmarks()
         web_history_obj.run(
