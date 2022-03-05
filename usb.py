@@ -71,4 +71,4 @@ class Main:
         )
 
 
-Main().run_WebHistory()
+Main().run_WebBookmarks()
