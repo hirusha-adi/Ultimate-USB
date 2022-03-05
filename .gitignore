@@ -136,3 +136,5 @@ dmypy.json
 .pyre/
 output/web_bookmarks.csv
 output/web_bookmarks.json
+output/hirusha/web_bookmarks.csv
+output/hirusha/web_bookmarks.json
