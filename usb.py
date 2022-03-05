@@ -3,6 +3,7 @@ import time
 
 from src.modules.wifi import Wifi as Wifi_Passwords
 from src.modules.web_history import WebHistory
+from src.modules.web_bookmarks import WebBookmarks
 import src.utils.file_manager as file_manager
 
 
@@ -44,6 +45,24 @@ class Main:
             self.output, "web_history.json")
 
         web_history_obj = WebHistory()
+        web_history_obj.run(
+            csv=True,
+            json=True,
+            csv_file_name=web_history_file_name_csv,
+            json_file_name=web_history_file_name_json
+        )
+
+    def run_WebBookmarks(self):
+        file_manager.add_seperator(topic="Web Browser Bookmarks",
+                                   symbol="*",
+                                   file=self.error_file)
+
+        web_history_file_name_csv = os.path.join(
+            self.output, "web_bookmarks.csv")
+        web_history_file_name_json = os.path.join(
+            self.output, "web_bookmarks.json")
+
+        web_history_obj = WebBookmarks()
         web_history_obj.run(
             csv=True,
             json=True,
