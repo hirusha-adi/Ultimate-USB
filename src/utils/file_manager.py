@@ -25,7 +25,7 @@ def create_folder_if_not_exists(path: str):
 
 
 def add_seperator(topic: str, symbol="*", file=None):
-    temp = "\n{seperator}\n{text}\n{seperator}".format(
+    temp = "\n\n{seperator}\n{text}\n{seperator}".format(
         text=topic, seperator=str(symbol)*30)
     if file is None:
         return temp
