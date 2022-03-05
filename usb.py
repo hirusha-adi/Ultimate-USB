@@ -2,6 +2,7 @@ import os
 import time
 
 from src.modules.wifi import Wifi as Wifi_Passwords
+from src.modules.web_history import WebHistory
 import src.utils.file_manager as file_manager
 
 
@@ -32,5 +33,23 @@ class Main:
                                                 error_file=self.error_file)
             wifi_passwords_obj.run()
 
+    def run_WebHistory(self):
+        file_manager.add_seperator(topic="Web Browser History",
+                                   symbol="*",
+                                   file=self.error_file)
 
-Main().run_Wifi_Passwords()
+        web_history_file_name_csv = os.path.join(
+            self.output, "web_history.csv")
+        web_history_file_name_json = os.path.join(
+            self.output, "web_history.json")
+
+        web_history_obj = WebHistory()
+        web_history_obj.run(
+            csv=True,
+            json=True,
+            csv_file_name=web_history_file_name_csv,
+            json_file_name=web_history_file_name_json
+        )
+
+
+Main().run_WebHistory()
