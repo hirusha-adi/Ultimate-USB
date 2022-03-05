@@ -21,12 +21,12 @@ class WebHistory:
     def setJson(self, json: bool = True):
         self._json = json
 
-    def runHistory(self,
-                   json_file_name: str,
-                   csv_file_name: str,
-                   csv: bool = None,
-                   json: bool = None
-                   ):
+    def run(self,
+            json_file_name: str,
+            csv_file_name: str,
+            csv: bool = None,
+            json: bool = None
+            ):
 
         if not(csv is None):
             self._csv = csv
