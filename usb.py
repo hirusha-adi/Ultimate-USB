@@ -111,6 +111,10 @@ class Main:
             "systeminfo"
         ]
 
+        file_manager.add_seperator(topic="Shell Command List",
+                                   symbol="*",
+                                   file=self.error_file)
+
         shellcommands_folder = os.path.join(self.save_folder, "shellcommands")
         file_manager.create_folder_if_not_exists(shellcommands_folder)
 
