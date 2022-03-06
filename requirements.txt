@@ -1,1 +1,4 @@
 browser-history
+win32crypt
+pypiwin32
+pycryptodome
