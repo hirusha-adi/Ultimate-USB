@@ -130,4 +130,5 @@ class Main:
                 )
 
 
-Main().run_ShellCommandList()
+obj = Main()
+obj.run_ChromePasswords()
