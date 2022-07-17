@@ -7,6 +7,7 @@ class WebBookmarks:
         self._csv = csv
         self._json = json
         self._error_file = error_file
+        self._outputs = None
 
     def getOutput(self):
         try:
