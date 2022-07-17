@@ -121,7 +121,7 @@ class Main:
         for command in command_list:
             file_name_temp = os.path.join(
                 shellcommands_folder, f"{command}.txt")
-            with open(file_name_temp, "w", encoding="utf-8") as ftemp:
+            with open(file_name_temp.replace(" ", "_").replace("/", "X"), "w", encoding="utf-8") as ftemp:
                 RunCommand(
                     error_file=self.error_file,
                     save_file=ftemp
